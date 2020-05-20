@@ -141,7 +141,9 @@ else:
 				a[1]+=1
 				b[0]+=1
 				b[1]+=1
-				print(tuple(a),tuple(b),sep="")
+				# print(tuple(a),tuple(b),sep="")
+				print( "(",a[0],",",a[1],")","(",b[0],",",b[1],")",sep="")
+
 
 
 
