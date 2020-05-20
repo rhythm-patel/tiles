@@ -122,15 +122,26 @@ else:
 		Parent = DFS("S","T",Graph,Capacity,Flow)
 		#print(MaxFlow)
 
-	print(1)
+	noOfPaths = 0
+
 	for x in Flow:
 		if Flow[x]>0 and "S" not in x and "T" not in x :
-			a,b = list(x[0]),list(x[1])
-			a[0]+=1
-			a[1]+=1
-			b[0]+=1
-			b[1]+=1
-			print(tuple(a),tuple(b),sep="")
+			noOfPaths += 1
+
+	if (noOfPaths != len(A)):
+		print(0)
+
+	else:
+
+		print(1)
+		for x in Flow:
+			if Flow[x]>0 and "S" not in x and "T" not in x :
+				a,b = list(x[0]),list(x[1])
+				a[0]+=1
+				a[1]+=1
+				b[0]+=1
+				b[1]+=1
+				print(tuple(a),tuple(b),sep="")
 
 
 
