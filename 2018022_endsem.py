@@ -27,7 +27,7 @@ def DFS(s,V,P,G,C,F):
 A = []
 B = []
 
-with open("input-2.txt","r") as InputFile:
+with open("input-1.txt","r") as InputFile:
 	I = InputFile.readlines()
 	n = int(I[0])
 	Grid = [[0 for i in range(n)] for j in range(n)]
@@ -115,7 +115,7 @@ else:
 		V={}
 		#Parent={}
 		Status = DFS("S",V,Parent,Graph,Capacity,Flow)
-		#print(MaxFlow)
+		print(MaxFlow)
 
 	Answer = []
 	for x in Flow:
@@ -132,10 +132,8 @@ else:
 	else:
 		print(1)
 		for i in Answer:
-			print(*i)
+			a = i[0]
+			b = i[1]
+			print( "(",a[0],",",a[1],")","(",b[0],",",b[1],")",sep="")
 endtime=time.time()
 print(endtime-starttime)
-
-
-
-
