@@ -3,8 +3,8 @@
 # EndSem Programming Assignment
 
 import time
-from collections import deque
-
+import sys
+sys.setrecursionlimit(10000000)
 starttime=time.time()
 
 def Check(n,r,c):
@@ -13,54 +13,21 @@ def Check(n,r,c):
 	else:
 		return False
 
-# def DFS(s,t,G,C,F,P,V,Vis):
-# 	print(Vis)
-# 	if s in Vis:
-# 		if Vis[s]==1 and s!="S":
-# 			P ={}
-# 			return True
-# 	else:
-# 		Vis[s]=1
-# 		Flag = False
-# 		V[s]=1
-# 		if t in G[s]:
-# 			P[t]=s
-# 			return True
-# 		for x in G[s]:
-# 			if x not in V and C[(s,x)]-F[(s,x)]>0:
-# 				P[x]=s
-# 				Flag = DFS(x,t,G,C,F,P,V,Vis)
-# 				if Flag:
-# 					break
-# 		return Flag
-
-def DFS(s,t,G,C,F):
-	Exist = False
-	V = {}
-	P = {}
-	Stack = deque()
-	for x in G:
-		V[x]=0
-	Stack.append(s)
-	while len(Stack) and not Exist:
-		x = Stack.pop()
-		V[x]=1
-		for y in G[x]:
-			if C[(x,y)]-F[(x,y)]>0 and V[y]==0:
-				Stack.append(y)
-				P[y]=x
-				if y == t:
-					Exist = True
-					break
-	if not Exist:
-		return 0
-	else:
-		return P
+def DFS(s,V,P,G,C,F):
+	V[s]=1
+	for x in G[s]:
+		if x not in V and C[(s,x)]>F[(s,x)]:
+			V[x]=1
+			P[x]=s
+			if x == "T":
+				return True
+			return DFS(x,V,P,G,C,F)
+	return False
 
 A = []
 B = []
 
-with open("input-1.txt","r") as InputFile:
+with open("input-2.txt","r") as InputFile:
 	I = InputFile.readlines()
 	n = int(I[0])
 	Grid = [[0 for i in range(n)] for j in range(n)]
@@ -117,20 +84,22 @@ else:
 	Flow = {}
 	Graph["S"]=[]
 	Graph["T"]=[]
-	Vis={}
+
 	for x in A:
 		Graph["S"].append(x)
 		Capacity[("S",x)] = 1
-		Vis[x]=0
 	for y in B:
 		Graph[y].append("T")
 		Capacity[(y,"T")] = 1
 	for z in Capacity:
 		Flow[z]=0
-	MaxFlow = 0
 
-	Parent = DFS("S","T",Graph,Capacity,Flow)
-	while Parent:
+	MaxFlow = 0
+	print(time.time()-starttime)
+	V={}
+	Parent={}
+	Status = DFS("S",V,Parent,Graph,Capacity,Flow)
+	while Status:
 		x = "T"
 		f =  1000000
 		while x!="S":
@@ -143,8 +112,9 @@ else:
 			if x!="T" and Parent[x]!="S":
 				Flow[(x,Parent[x])] -= f
 			x = Parent[x]
-
-		Parent = DFS("S","T",Graph,Capacity,Flow)
+		V={}
+		#Parent={}
+		Status = DFS("S",V,Parent,Graph,Capacity,Flow)
 		#print(MaxFlow)
 
 	Answer = []
@@ -165,3 +135,7 @@ else:
 			print(*i)
 endtime=time.time()
 print(endtime-starttime)
+
+
+
+
