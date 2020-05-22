@@ -21,13 +21,14 @@ def DFS(s,V,P,G,C,F):
 			P[x]=s
 			if x == "T":
 				return True
-			return DFS(x,V,P,G,C,F)
+			if DFS(x,V,P,G,C,F):
+				return True
 	return False
 
 A = []
 B = []
 
-with open("input-1.txt","r") as InputFile:
+with open("input-3.txt","r") as InputFile:
 	I = InputFile.readlines()
 	n = int(I[0])
 	Grid = [[0 for i in range(n)] for j in range(n)]
@@ -42,6 +43,8 @@ with open("input-1.txt","r") as InputFile:
 
 if (len(A)!=len(B)):
 	print(0)
+if len(A)==0:
+	print(1)
 else:
 	Graph = {}
 	Capacity = {}
@@ -100,6 +103,7 @@ else:
 	Parent={}
 	Status = DFS("S",V,Parent,Graph,Capacity,Flow)
 	while Status:
+		#f = 1
 		x = "T"
 		f =  1000000
 		while x!="S":
@@ -113,7 +117,7 @@ else:
 				Flow[(x,Parent[x])] -= f
 			x = Parent[x]
 		V={}
-		#Parent={}
+		Parent={}
 		Status = DFS("S",V,Parent,Graph,Capacity,Flow)
 		print(MaxFlow)
 
@@ -137,3 +141,7 @@ else:
 			print( "(",a[0],",",a[1],")","(",b[0],",",b[1],")",sep="")
 endtime=time.time()
 print(endtime-starttime)
+
+
+
+
