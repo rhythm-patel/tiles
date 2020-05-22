@@ -53,7 +53,7 @@ def DFS(start,end,visited=set(),path = []):
 A = []
 B = []
 
-with open("input-1.txt","r") as InputFile:
+with open("input-2.txt","r") as InputFile:
 	I = InputFile.readlines()
 	n = int(I[0])
 	Grid = [[0 for i in range(n)] for j in range(n)]
@@ -68,6 +68,7 @@ with open("input-1.txt","r") as InputFile:
 
 if (len(A)!=len(B)):
 	print(0)
+	sys.exit(0)
 if len(A)==0:
 	print(1)
 else:
