@@ -137,6 +137,13 @@ else:
 	while (Status == True):
 		paths = []
 		Status = DFS("S","T")
+		for i in range(len(paths)-1)
+			a=paths[i]
+			b=paths[i+1]
+			Graph[a].pop(b)
+			Graph[b].append(a)
+			Capacity[a,b]=0 #NOT REALLY IMP
+			Capacity[b,a]=1
 		print(paths)
 
 	# while Status:
