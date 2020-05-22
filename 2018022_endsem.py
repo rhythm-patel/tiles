@@ -2,11 +2,11 @@
 # Rhythm Patel [2018083]
 # EndSem Programming Assignment
 
-import time
 import sys
+import time
 sys.setrecursionlimit(10000000)
 starttime=time.time()
-Answer={}
+Answer = {}
 def Check(n,r,c):
 	if r>=0 and r<n and c>=0 and c<n:
 		return True
@@ -27,23 +27,23 @@ def Check(n,r,c):
 
 # DFS("S",V,Parent,Graph,Capacity,Flow)
 
-def DFS(start,end,visited=set(),path = []):
-	# print ("Start:",start)
+def DFS(startNode,sink,visited=set(),curPath = []):
+	# print ("Start:",startNode)
+	visited.add(startNode)
 	Bool = False
-	visited.add(start)
-	path = path + [start] 
+	curPath = curPath + [startNode] 
 
-	if end in Graph[start]: # if end reachable
-		path = path + [end]
-		paths.append(path)
+	if sink in Graph[startNode]: # if sink reachable
+		curPath = curPath + [sink]
+		paths.append(curPath)
 		# print ("sink cond")
 		return True
 
-	for vertex in Graph[start]:
+	for vertex in Graph[startNode]:
 		if (vertex not in visited):
-			# print ("vertex",vertex,',',start)
-			Bool = DFS(vertex,end,visited,path)
-			if (start != 'S') and Bool:	
+			# print ("vertex",vertex,',',startNode)
+			Bool = DFS(vertex,sink,visited,curPath)
+			if (Bool == True) and (startNode != 'S'):	
 				break
 
 	return Bool
@@ -53,7 +53,7 @@ def DFS(start,end,visited=set(),path = []):
 A = []
 B = []
 
-with open("input-2.txt","r") as InputFile:
+with open("input-1.txt","r") as InputFile:
 	I = InputFile.readlines()
 	n = int(I[0])
 	Grid = [[0 for i in range(n)] for j in range(n)]
