@@ -6,7 +6,7 @@ import time
 import sys
 sys.setrecursionlimit(10000000)
 starttime=time.time()
-
+Answer=[]
 def Check(n,r,c):
 	if r>=0 and r<n and c>=0 and c<n:
 		return True
@@ -137,13 +137,20 @@ else:
 	while (Status == True):
 		paths = []
 		Status = DFS("S","T")
-		for i in range(len(paths)-1)
-			a=paths[i]
-			b=paths[i+1]
-			Graph[a].pop(b)
-			Graph[b].append(a)
-			Capacity[a,b]=0 #NOT REALLY IMP
-			Capacity[b,a]=1
+		for p in paths:
+			for i in range(len(p)-1):
+				a=p[i]
+				b=p[i+1]
+				Graph[a].pop(b)
+				Graph[b].append(a)
+				Capacity[a,b]=0 #NOT REALLY IMP
+				Capacity[b,a]=1
+		for p in paths:
+			temp = P[::-1]
+			temp = temp[1:-1]
+			for i in range(0,len(temp)-1,2)
+				Answer[temp[i]]=temp[i+1]
+		print(Answer)
 		print(paths)
 
 	# while Status:
