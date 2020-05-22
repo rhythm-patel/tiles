@@ -28,6 +28,7 @@ def Check(n,r,c):
 # DFS("S",V,Parent,Graph,Capacity,Flow)
 
 def DFS(start,end,visited=set(),path = []):
+	# print ("Start:",start)
 	Bool = False
 	visited.add(start)
 	path = path + [start] 
@@ -35,10 +36,12 @@ def DFS(start,end,visited=set(),path = []):
 	if end in Graph[start]: # if end reachable
 		path = path + [end]
 		paths.append(path)
+		# print ("sink cond")
 		return True
 
 	for vertex in Graph[start]:
 		if (vertex not in visited):
+			# print ("vertex",vertex,',',start)
 			Bool = DFS(vertex,end,visited,path)
 			if (start != 'S') and Bool:	
 				break
@@ -135,8 +138,9 @@ else:
 	Status = True
 	c=1
 	while (Status == True):
+		Status = False
 		paths = []
-		Status = DFS("S","T")
+		Status = DFS("S","T",set())
 		for p in paths:
 			for i in range(len(p)-1):
 				a=p[i]
@@ -145,11 +149,20 @@ else:
 				Graph[b].append(a)
 				Capacity[a,b]=0 #NOT REALLY IMP
 				Capacity[b,a]=1
+		# for k in Graph:
+			# print (k,":",Graph[k])
 		for p in paths:
 			temp = p[::-1]
 			temp = temp[1:-1]
 			for i in range(0,len(temp)-1,2):
 				Answer[temp[i]]=temp[i+1]
+				Status = True
+				# if temp[i+1] in Answer:
+				# 	Answer[temp[i+1]]=temp[i]
+				# else:
+				# 	Answer[temp[i]]=temp[i+1]
+		# print ("Status last: ", Status)
+				
 		# print(Answer)
 
 	# while Status:
@@ -190,7 +203,7 @@ else:
 			b = i[1]+1
 			c = Answer[i][0]+1
 			d = Answer[i][1]+1
-			print( "(",a,",",b,")","(",c,",",d,")",sep="")
+			print( "(",b,",",a,")","(",d,",",c,")",sep="")
 endtime=time.time()
 print(endtime-starttime)
 
