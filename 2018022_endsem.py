@@ -146,12 +146,11 @@ else:
 				Capacity[a,b]=0 #NOT REALLY IMP
 				Capacity[b,a]=1
 		for p in paths:
-			temp = P[::-1]
+			temp = p[::-1]
 			temp = temp[1:-1]
-			for i in range(0,len(temp)-1,2)
+			for i in range(0,len(temp)-1,2):
 				Answer[temp[i]]=temp[i+1]
-		print(Answer)
-		print(paths)
+		# print(Answer)
 
 	# while Status:
 	# 	#f = 1
@@ -182,14 +181,16 @@ else:
 	# 		b[1]+=1
 	# 		Answer.append([tuple(a),tuple(b)])
 
-	# if len(Answer)!=len(A):
-	# 	print(0)
-	# else:
-	# 	print(1)
-	# 	for i in Answer:
-	# 		a = i[0]
-	# 		b = i[1]
-	# 		print( "(",a[0],",",a[1],")","(",b[0],",",b[1],")",sep="")
+	if len(Answer)!=len(A):
+		print(0)
+	else:
+		print(1)
+		for i in Answer:
+			a = i[0]+1
+			b = i[1]+1
+			c = Answer[i][0]+1
+			d = Answer[i][1]+1
+			print( "(",a,",",b,")","(",c,",",d,")",sep="")
 endtime=time.time()
 print(endtime-starttime)
 
