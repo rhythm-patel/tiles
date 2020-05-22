@@ -203,7 +203,7 @@ else:
 			b = i[1]+1
 			c = Answer[i][0]+1
 			d = Answer[i][1]+1
-			print( "(",b,",",a,")","(",d,",",c,")",sep="")
+			print( "(",a,",",b,")","(",c,",",d,")",sep="")
 endtime=time.time()
 print(endtime-starttime)
 
