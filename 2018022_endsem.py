@@ -6,7 +6,7 @@ import time
 import sys
 sys.setrecursionlimit(10000000)
 starttime=time.time()
-Answer=[]
+Answer={}
 def Check(n,r,c):
 	if r>=0 and r<n and c>=0 and c<n:
 		return True
@@ -141,7 +141,7 @@ else:
 			for i in range(len(p)-1):
 				a=p[i]
 				b=p[i+1]
-				Graph[a].pop(b)
+				Graph[a].remove(b)
 				Graph[b].append(a)
 				Capacity[a,b]=0 #NOT REALLY IMP
 				Capacity[b,a]=1
